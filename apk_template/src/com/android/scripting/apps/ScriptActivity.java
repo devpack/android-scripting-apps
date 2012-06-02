@@ -318,10 +318,10 @@ public class ScriptActivity extends Activity {
 						FileUtils.chmod(new File(this.getFilesDir().getAbsolutePath()+ config.getINTERPRETER_BIN_RELATIVE_PATH() ), 755);
 					}
 					// interpreter extras -> /sdcard/com.xxx/
-					else if (sFileName.endsWith(config.getINTERPRETER_EXTRAS_ZIP_NAME() )) {
+					else if ( config.getINTERPRETER_EXTRAS_ZIP_NAME() != null && sFileName.endsWith(config.getINTERPRETER_EXTRAS_ZIP_NAME()) ) {
 						Utils.createDirectoryOnExternalStorage( this.getPackageName() + "/" + "extras");
 						Utils.createDirectoryOnExternalStorage( this.getPackageName() + "/" + "extras" + "/" + "tmp");
-						succeed &= Utils.unzip(content, Environment.getExternalStorageDirectory().getAbsolutePath() + "/" + this.getPackageName() + "/extras/", true);
+						succeed &= Utils.unzip(content, Environment.getExternalStorageDirectory().getAbsolutePath() + "/" + this.getPackageName() + "/extras/", true);							
 					}
 					
 				} catch (Exception e) {

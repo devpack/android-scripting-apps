@@ -16,7 +16,7 @@ public class Config {
 	private String MAIN_SCRIPT_NAME;
 	private String PROJECT_ZIP_NAME = "project.zip";
 	private String INTERPRETER_ZIP_NAME;
-	private String INTERPRETER_EXTRAS_ZIP_NAME;
+	private String INTERPRETER_EXTRAS_ZIP_NAME = null;
 	
     private String INTERPRETER_BIN_RELATIVE_PATH;
     private String INTERPRETER_NAME;
@@ -24,7 +24,7 @@ public class Config {
 	
     private Map<String, String> ENV_VARS;
     
-    private String[] SCRIPT_ARGS;
+    private String[] SCRIPT_ARGS = new String[0];
     
 	private String LOG_TAG;
 
