@@ -160,7 +160,7 @@ public class ScriptService extends ForegroundService {
 			args.add(sarg);
 		}
 
-		File interpreterBinary = new File(this.getFilesDir().getAbsolutePath() + config.getINTERPRETER_BIN_RELATIVE_PATH());
+		File interpreterBinary = new File(config.getINTERPRETER_BIN_PATH());
 		
 		// launch script
 		mProxy = new AndroidProxy(this, null, true);

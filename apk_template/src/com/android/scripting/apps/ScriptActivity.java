@@ -80,7 +80,7 @@ public class ScriptActivity extends Activity {
 		            System.out.println("MAIN_SCRIPT_NAME=" + pro.getProperty("MAIN_SCRIPT_NAME"));
 		            System.out.println("INTERPRETER_ZIP_NAME=" + pro.getProperty("INTERPRETER_ZIP_NAME"));
 		            System.out.println("INTERPRETER_EXTRAS_ZIP_NAME=" + pro.getProperty("INTERPRETER_EXTRAS_ZIP_NAME"));
-		            System.out.println("INTERPRETER_BIN_RELATIVE_PATH=" + pro.getProperty("INTERPRETER_BIN_RELATIVE_PATH"));
+		            System.out.println("INTERPRETER_BIN_PATH=" + pro.getProperty("INTERPRETER_BIN_PATH"));
 		            System.out.println("INTERPRETER_NAME=" + pro.getProperty("INTERPRETER_NAME"));
 		            System.out.println("INTERPRETER_NICE_NAME=" + pro.getProperty("INTERPRETER_NICE_NAME"));
 		            System.out.println("ENV_VARS=" + pro.getProperty("ENV_VARS"));
@@ -126,13 +126,17 @@ public class ScriptActivity extends Activity {
 					 }
 			        }
 			        
-			        // INTERPRETER_BIN_RELATIVE_PATH
-			        if(pro.getProperty("INTERPRETER_BIN_RELATIVE_PATH") != null) {
+			        // INTERPRETER_BIN_PATH
+			        if(pro.getProperty("INTERPRETER_BIN_PATH") != null) {
 			         try {
-			           String s = pro.getProperty("INTERPRETER_BIN_RELATIVE_PATH");
-			           config.setINTERPRETER_BIN_RELATIVE_PATH(s);
+			        	   String extStorage = Environment.getExternalStorageDirectory().getAbsolutePath();
+			        	   String fileDir = this.getFilesDir().getAbsolutePath();
+			        	   String packageName = this.getPackageName();
+			        	   
+			        	   String s = pro.getProperty("INTERPRETER_BIN_PATH");
+			        	   config.setINTERPRETER_BIN_PATH(s.replaceAll("getExternalStorageDirectory", extStorage).replaceAll("getFilesDir", fileDir).replaceAll("getPackageName", packageName));
 					 } catch (Exception e) {
-					   System.err.println("Fail to set INTERPRETER_BIN_RELATIVE_PATH, error: " + e);
+					   System.err.println("Fail to set INTERPRETER_BIN_PATH, error: " + e);
 					 }
 			        }
 			        
@@ -339,7 +343,7 @@ public class ScriptActivity extends Activity {
 					// interpreter bin -> /data/data/com.xxx/...
 					else if (config.getINTERPRETER_ZIP_NAME() != null && sFileName.endsWith(config.getINTERPRETER_ZIP_NAME()) ) {
 						succeed &= Utils.unzip(content, this.getFilesDir().getAbsolutePath()+ "/", true);
-						FileUtils.chmod(new File(this.getFilesDir().getAbsolutePath()+ config.getINTERPRETER_BIN_RELATIVE_PATH() ), 755);
+						FileUtils.chmod(new File(config.getINTERPRETER_BIN_PATH() ), 755);
 					}
 					// interpreter extras -> /sdcard/com.xxx/
 					else if ( config.getINTERPRETER_EXTRAS_ZIP_NAME() != null && sFileName.endsWith(config.getINTERPRETER_EXTRAS_ZIP_NAME()) ) {

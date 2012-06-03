@@ -14,13 +14,17 @@ import android.os.Message;
 import android.os.PowerManager;
 import android.view.Window;
 import android.view.WindowManager;
+import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 import android.util.Log;
 
 public class Webview extends Activity {
 
+	private Activity that;
     private WebView mWebView;
 	private RelativeLayout  container;
 	private PowerManager.WakeLock mWakeLock;
@@ -33,6 +37,7 @@ public class Webview extends Activity {
     @Override
     public void onCreate(Bundle icicle) {
     	super.onCreate(icicle);
+    	that = this;
     	
     	requestWindowFeature(Window.FEATURE_NO_TITLE); 
     	this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
@@ -105,6 +110,15 @@ public class Webview extends Activity {
                 e.printStackTrace();
             }
           }	        
+        
+        mWebView.setWebChromeClient(new WebChromeClient() {
+        });
+        
+        mWebView.setWebViewClient(new WebViewClient() {
+//        	public void onReceivedError(WebView view, int errorCode, String description, String failingUrl) {
+//        		Toast.makeText(that, "Error: " + description, Toast.LENGTH_SHORT).show();
+//        	}
+        });
         
         webSettings.setCacheMode (WebSettings.LOAD_NORMAL);
         
