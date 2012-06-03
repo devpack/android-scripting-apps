@@ -187,8 +187,12 @@ public class ScriptActivity extends Activity {
 			           String[] sub = s.split(",");
 			           String[] args = new String[sub.length];
 			           
+		        	   String extStorage = Environment.getExternalStorageDirectory().getAbsolutePath();
+		        	   String packageName = this.getPackageName();
+		        	   String fileDir = this.getFilesDir().getAbsolutePath();
+
 			           for(int i=0; i<sub.length; i++) {
-			        	   args[i]=sub[i];
+			        	   args[i]=sub[1].replaceAll("getExternalStorageDirectory", extStorage).replaceAll("getFilesDir", fileDir).replaceAll("getPackageName", packageName);
 			           }
 			           
 			           config.setSCRIPT_ARGS(args);
