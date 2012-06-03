@@ -328,7 +328,7 @@ public class ScriptActivity extends Activity {
 						succeed &= Utils.unzip(content, this.getFilesDir().getAbsolutePath()+ "/", true);
 					}
 					// interpreter bin -> /data/data/com.xxx/...
-					else if (sFileName.endsWith(config.getINTERPRETER_ZIP_NAME()) ) {
+					else if (config.getINTERPRETER_ZIP_NAME() != null && sFileName.endsWith(config.getINTERPRETER_ZIP_NAME()) ) {
 						succeed &= Utils.unzip(content, this.getFilesDir().getAbsolutePath()+ "/", true);
 						FileUtils.chmod(new File(this.getFilesDir().getAbsolutePath()+ config.getINTERPRETER_BIN_RELATIVE_PATH() ), 755);
 					}
