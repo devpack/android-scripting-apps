@@ -40,6 +40,8 @@
       			android:name="com.googlecode.android_scripting.activity.FutureActivity" 
       			android:theme="@android:style/Theme.Translucent"/>
     
+    <activity	android:name="Webview" android:configChanges="orientation|keyboardHidden|keyboard"/>
+    
 </application>
 
   <supports-screens android:xlargeScreens="true" />

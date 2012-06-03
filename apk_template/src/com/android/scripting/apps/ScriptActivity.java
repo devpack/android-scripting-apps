@@ -60,7 +60,7 @@ public class ScriptActivity extends Activity {
     		}});
     	}
     	else {
-    	    runScriptService();
+    		openView();
     	    finish();
     	}
 
@@ -282,14 +282,23 @@ public class ScriptActivity extends Activity {
 		    	sendmsg("installFailed", "");
 	    	}
 	    	
-		    runScriptService();
+	    	openView();
 		    finish();
 		   }
 	   
 	  }
 	
-  private void runScriptService() {
-	  startService(new Intent(this, ScriptService.class));
+	  
+  private void openView() {
+	  if(config.getMAIN_SCRIPT_NAME().endsWith("html")) {
+			Intent intent = new Intent(getBaseContext(), Webview.class);
+			intent.setAction(Intent.ACTION_VIEW);
+			intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+			getApplication().startActivity(intent);
+	  }
+	  else {
+		  startService(new Intent(this, ScriptService.class));
+	  }
   }
   
 	private void createOurExternalStorageRootDir() {
