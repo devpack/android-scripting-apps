@@ -26,7 +26,7 @@ public class Config {
     
     private String[] SCRIPT_ARGS = new String[0];
     
-	private String LOG_TAG;
+	private String LOG_TAG = "AndroidScriptingApps";
 
 	public String getMAIN_SCRIPT_NAME() {
 		return MAIN_SCRIPT_NAME;

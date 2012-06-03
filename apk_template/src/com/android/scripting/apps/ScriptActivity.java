@@ -76,6 +76,7 @@ public class ScriptActivity extends Activity {
 		            Properties pro = new Properties();
 		            pro.load(projectDescriptionIni);
 		   
+		            System.out.println("LOG_TAG=" + pro.getProperty("LOG_TAG"));
 		            System.out.println("MAIN_SCRIPT_NAME=" + pro.getProperty("MAIN_SCRIPT_NAME"));
 		            System.out.println("INTERPRETER_ZIP_NAME=" + pro.getProperty("INTERPRETER_ZIP_NAME"));
 		            System.out.println("INTERPRETER_EXTRAS_ZIP_NAME=" + pro.getProperty("INTERPRETER_EXTRAS_ZIP_NAME"));
@@ -85,6 +86,16 @@ public class ScriptActivity extends Activity {
 		            System.out.println("ENV_VARS=" + pro.getProperty("ENV_VARS"));
 		            System.out.println("SCRIPT_ARGS=" + pro.getProperty("SCRIPT_ARGS"));
 
+			        // LOG_TAG
+			        if(pro.getProperty("LOG_TAG") != null) {
+			         try {
+			           String s = pro.getProperty("LOG_TAG");
+			           config.setLOG_TAG(s);
+					 } catch (Exception e) {
+					   System.err.println("Fail to set LOG_TAG, error: " + e);
+					 }
+			        }
+			        
 			        // MAIN_SCRIPT_NAME
 			        if(pro.getProperty("MAIN_SCRIPT_NAME") != null) {
 			         try {
