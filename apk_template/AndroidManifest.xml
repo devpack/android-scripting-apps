@@ -30,7 +30,7 @@
       
     </activity>
     
-     <service 	android:name="BackgroundScriptServiceService">
+     <service 	android:name="BackgroundScriptService">
     	<intent-filter>
 			<action android:name="com.asap.BackgroundScriptService" />
 		</intent-filter>
