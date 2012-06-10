@@ -1,47 +1,31 @@
 package com.android.scripting.apps;
 
-import android.app.Notification;
-import android.app.PendingIntent;
+import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Binder;
 import android.os.Environment;
-import android.os.Handler;
 import android.os.IBinder;
-import android.util.Log;
 
 import com.android.scripting.apps.config.Config;
 import com.android.scripting.apps.process.MyScriptProcess;
 import com.googlecode.android_scripting.AndroidProxy;
-import com.googlecode.android_scripting.Constants;
-import com.googlecode.android_scripting.FeaturedInterpreters;
-import com.googlecode.android_scripting.ForegroundService;
-import com.googlecode.android_scripting.NotificationIdFactory;
-import com.googlecode.android_scripting.interpreter.Interpreter;
 import com.googlecode.android_scripting.jsonrpc.RpcReceiverManager;
 import com.googlecode.android_scripting.interpreter.InterpreterConfiguration;
-import com.googlecode.android_scripting.BaseApplication;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Properties;
 import java.util.concurrent.CountDownLatch;
 
-public class ScriptService extends ForegroundService {
+public class BackgroundScriptService extends Service {
 	Config config = Config.getConfigSingleton();
 
-	private final static int NOTIFICATION_ID = NotificationIdFactory.create();
 	private final CountDownLatch mLatch = new CountDownLatch(1);
-	private final IBinder mBinder;
+	private IBinder mBinder;
 	private MyScriptProcess myScriptProcess;
 	
-	private static ScriptService instance;
+	private static BackgroundScriptService instance;
 	private boolean killMe;
 	  
 	private InterpreterConfiguration mInterpreterConfiguration = null;
@@ -56,8 +40,8 @@ public class ScriptService extends ForegroundService {
     // ------------------------------------------------------------------------------------------------------
 
 	public class LocalBinder extends Binder {
-		public ScriptService getService() {
-			return ScriptService.this;
+		public BackgroundScriptService getService() {
+			return BackgroundScriptService.this;
 		}
 	}
 
@@ -70,10 +54,9 @@ public class ScriptService extends ForegroundService {
 
     // ------------------------------------------------------------------------------------------------------
 
-	public ScriptService() {
-		super(NOTIFICATION_ID);
-		mBinder = new LocalBinder();
-	}
+//	public BackgroundScriptService() {
+//		mBinder = new LocalBinder();
+//	}
 
     // ------------------------------------------------------------------------------------------------------
 
@@ -85,7 +68,7 @@ public class ScriptService extends ForegroundService {
     // ------------------------------------------------------------------------------------------------------
 
     public static Context getAppContext() {
-        return ScriptService.context;
+        return BackgroundScriptService.context;
     }
     
     // ------------------------------------------------------------------------------------------------------
@@ -93,7 +76,8 @@ public class ScriptService extends ForegroundService {
 	@Override
 	public void onCreate() {
 		super.onCreate();
-		ScriptService.context = getApplicationContext();
+		BackgroundScriptService.context = getApplicationContext();
+		mBinder = new LocalBinder();
 	}
 
     // ------------------------------------------------------------------------------------------------------
@@ -195,17 +179,5 @@ public class ScriptService extends ForegroundService {
 	}
 
     // ------------------------------------------------------------------------------------------------------
-
-	@Override
-	protected Notification createNotification() {
-	    Notification notification =
-	        new Notification(R.drawable.icon, this.getString(R.string.loading), System.currentTimeMillis());
-	    // This contentIntent is a noop.
-	    PendingIntent contentIntent = PendingIntent.getService(this, 0, new Intent(), 0);
-	    notification.setLatestEventInfo(this, this.getString(R.string.app_name), this.getString(R.string.loading), contentIntent);
-	    notification.flags = Notification.FLAG_AUTO_CANCEL;
-		return notification;
-	}
-
 	
 }

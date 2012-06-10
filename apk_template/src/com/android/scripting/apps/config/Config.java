@@ -13,6 +13,8 @@ public class Config {
 	private Config() {
 	}
 	
+	private boolean IS_FOREGROUND_SERVICE = true;
+
 	private String MAIN_SCRIPT_NAME;
 	private String PROJECT_ZIP_NAME = "project.zip";
 	private String INTERPRETER_ZIP_NAME = null;
@@ -27,6 +29,14 @@ public class Config {
     private String[] SCRIPT_ARGS = new String[0];
     
 	private String LOG_TAG = "AndroidScriptingApps";
+
+	public boolean isIS_FOREGROUND_SERVICE() {
+		return IS_FOREGROUND_SERVICE;
+	}
+
+	public void setIS_FOREGROUND_SERVICE(boolean iS_FOREGROUND_SERVICE) {
+		IS_FOREGROUND_SERVICE = iS_FOREGROUND_SERVICE;
+	}
 
 	public String getMAIN_SCRIPT_NAME() {
 		return MAIN_SCRIPT_NAME;

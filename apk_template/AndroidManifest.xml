@@ -30,12 +30,22 @@
       
     </activity>
     
+     <service 	android:name="BackgroundScriptServiceService">
+    	<intent-filter>
+			<action android:name="com.android.scripting.apps.BackgroundScriptService" />
+		</intent-filter>
+	</service>   
     <service 	android:name="ScriptService">
     	<intent-filter>
 			<action android:name="com.android.scripting.apps.ScriptService" />
 		</intent-filter>
 	</service>
-
+    <service 	android:name="RpcService">
+    	<intent-filter>
+			<action android:name="com.android.scripting.apps.RpcService" />
+		</intent-filter>
+	</service>
+	
     <activity 	android:configChanges="keyboardHidden|orientation"
       			android:name="com.googlecode.android_scripting.activity.FutureActivity" 
       			android:theme="@android:style/Theme.Translucent"/>

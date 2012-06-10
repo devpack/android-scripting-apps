@@ -67,6 +67,18 @@ public class ScriptActivity extends Activity {
 		//onStart();
   }
 
+	//-------------------------------------------------------------------------------------------------
+
+	private String fixBoolean(String s) {
+		  if(s.equalsIgnoreCase("true") || s.equalsIgnoreCase("t") || s.equalsIgnoreCase("1") || s.equalsIgnoreCase("on") || s.equalsIgnoreCase("yes") || s.equalsIgnoreCase("y")) {
+			  s = "true";
+		  }
+		  if(s.equalsIgnoreCase("false") || s.equalsIgnoreCase("f") || s.equalsIgnoreCase("0") || s.equalsIgnoreCase("off") || s.equalsIgnoreCase("no") || s.equalsIgnoreCase("n")) {
+			  s = "false";
+		  }
+		return s;
+	}
+	
     // ------------------------------------------------------------------------------------------------------
 
 	  private void ProjectDescriptionIniFile() {
@@ -75,7 +87,8 @@ public class ScriptActivity extends Activity {
 			    
 		            Properties pro = new Properties();
 		            pro.load(projectDescriptionIni);
-		   
+	
+		            System.out.println("IS_FOREGROUND_SERVICE=" + pro.getProperty("IS_FOREGROUND_SERVICE"));
 		            System.out.println("LOG_TAG=" + pro.getProperty("LOG_TAG"));
 		            System.out.println("MAIN_SCRIPT_NAME=" + pro.getProperty("MAIN_SCRIPT_NAME"));
 		            System.out.println("INTERPRETER_ZIP_NAME=" + pro.getProperty("INTERPRETER_ZIP_NAME"));
@@ -86,6 +99,17 @@ public class ScriptActivity extends Activity {
 		            System.out.println("ENV_VARS=" + pro.getProperty("ENV_VARS"));
 		            System.out.println("SCRIPT_ARGS=" + pro.getProperty("SCRIPT_ARGS"));
 
+			        // IS_FOREGROUND_SERVICE
+			        if(pro.getProperty("IS_FOREGROUND_SERVICE") != null) {
+			         try {
+			           String s = fixBoolean( pro.getProperty("IS_FOREGROUND_SERVICE"));
+			           boolean b = Boolean.parseBoolean(s);
+			           config.setIS_FOREGROUND_SERVICE(b);
+					 } catch (Exception e) {
+					   System.err.println("Fail to set IS_FOREGROUND_SERVICE, error: " + e);
+					 }
+			        }
+			        
 			        // LOG_TAG
 			        if(pro.getProperty("LOG_TAG") != null) {
 			         try {
@@ -295,13 +319,15 @@ public class ScriptActivity extends Activity {
 	  
   private void openView() {
 	  if(config.getMAIN_SCRIPT_NAME().endsWith("html")) {
-			Intent intent = new Intent(getBaseContext(), Webview.class);
-			intent.setAction(Intent.ACTION_VIEW);
-			intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-			getApplication().startActivity(intent);
+		  startService(new Intent(this, RpcService.class));
 	  }
 	  else {
-		  startService(new Intent(this, ScriptService.class));
+		  if(config.isIS_FOREGROUND_SERVICE()) {
+			  startService(new Intent(this, ScriptService.class));
+		  }
+		  else {
+			  startService(new Intent(this, BackgroundScriptService.class)); 
+		  }
 	  }
   }
   
