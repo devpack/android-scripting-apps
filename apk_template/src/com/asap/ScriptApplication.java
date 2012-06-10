@@ -1,9 +1,9 @@
-package com.android.scripting.apps;
+package com.asap;
 
 import android.content.Context;
 import android.os.Environment;
 
-import com.android.scripting.apps.config.Config;
+import com.asap.config.Config;
 import com.googlecode.android_scripting.BaseApplication;
 import com.googlecode.android_scripting.interpreter.InterpreterConfiguration.ConfigurationObserver;
 

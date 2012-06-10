@@ -2,7 +2,7 @@ package com.googlecode.android_scripting.facade;
 
 import android.util.Log;
 
-import com.android.scripting.apps.config.Config;
+import com.asap.config.Config;
 import com.googlecode.android_scripting.facade.FacadeManager;
 import com.googlecode.android_scripting.jsonrpc.RpcReceiver;
 import com.googlecode.android_scripting.rpc.Rpc;

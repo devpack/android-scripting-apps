@@ -1,9 +1,9 @@
-package com.android.scripting.apps.process;
+package com.asap.process;
 
 import android.os.Environment;
 
-import com.android.scripting.apps.ScriptApplication;
-import com.android.scripting.apps.config.Config;
+import com.asap.ScriptApplication;
+import com.asap.config.Config;
 import com.googlecode.android_scripting.Analytics;
 import com.googlecode.android_scripting.AndroidProxy;
 import com.googlecode.android_scripting.interpreter.Interpreter;

@@ -1,4 +1,4 @@
-package com.android.scripting.apps;
+package com.asap;
 
 import android.app.Service;
 import android.content.Intent;

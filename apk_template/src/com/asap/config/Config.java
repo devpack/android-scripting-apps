@@ -1,4 +1,4 @@
-package com.android.scripting.apps.config;
+package com.asap.config;
 
 import java.util.Map;
 

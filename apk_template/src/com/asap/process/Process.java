@@ -1,8 +1,8 @@
-package com.android.scripting.apps.process;
+package com.asap.process;
 
 import android.util.Log;
 
-import com.android.scripting.apps.config.Config;
+import com.asap.config.Config;
 import com.googlecode.android_scripting.Exec;
 import com.trilead.ssh2.StreamGobbler;
 

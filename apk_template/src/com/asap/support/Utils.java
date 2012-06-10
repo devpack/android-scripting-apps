@@ -1,9 +1,9 @@
-package com.android.scripting.apps.support;
+package com.asap.support;
 
 import android.os.Environment;
 import android.util.Log;
 
-import com.android.scripting.apps.config.Config;
+import com.asap.config.Config;
 import com.googlecode.android_scripting.FileUtils;
 
 import java.io.BufferedInputStream;

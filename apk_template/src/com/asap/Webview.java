@@ -1,6 +1,6 @@
-package com.android.scripting.apps;
+package com.asap;
 
-import com.android.scripting.apps.config.Config;
+import com.asap.config.Config;
 import com.googlecode.android_scripting.AndroidProxy;
 import com.googlecode.android_scripting.FileUtils;
 import com.googlecode.android_scripting.rpc.MethodDescriptor;

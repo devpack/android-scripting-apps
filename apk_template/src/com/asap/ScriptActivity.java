@@ -1,7 +1,8 @@
-package com.android.scripting.apps;
+package com.asap;
 
-import com.android.scripting.apps.config.Config;
-import com.android.scripting.apps.support.Utils;
+import com.asap.R;
+import com.asap.config.Config;
+import com.asap.support.Utils;
 import com.googlecode.android_scripting.FileUtils;
 
 import java.io.File;
