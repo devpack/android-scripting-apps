@@ -160,12 +160,8 @@ public class Webview extends Activity {
 
         // TODO
         //RpcReceiverManager mFacadeManager = getRpcReceiverManager();
-        
-        mFacadeManager = RpcService.mProxy.getRpcReceiverManagerFactory().getRpcReceiverManagers().get(0);
-        
-        mFacadeManager.getReceiver(EventFacade.class).addGlobalEventObserver(mObserver);
-        
-        mAPIWrapperSource = generateAPIWrapper();
+        //mFacadeManager.getReceiver(EventFacade.class).addGlobalEventObserver(mObserver);
+        //mAPIWrapperSource = generateAPIWrapper();
         
         PowerManager pm = (PowerManager) getSystemService(Context.POWER_SERVICE);
         mWakeLock = pm.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, config.getLOG_TAG());	
